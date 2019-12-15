@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 public class mapOperationsTest {
 
@@ -27,25 +26,40 @@ public class mapOperationsTest {
     }
 
     @Test
-    public void isSortingAlright() {
+    public void testEmptyMapReturnsEmptyArrayAfterSortingMethod() {
+        testMap.clear();
+        testArray = mO.sortByValue(testMap).values().toArray();
+        System.out.println(testArray);
+        assertTrue(testArray.length == 0);
+    }
+
+    @Test
+    public void testEmptyMapReturnsEmptyArrayAfterResortingMethod() {
+        testMap.clear();
+        mO.makeAndResortArrays(testMap);
+        assertTrue(mO.completeArray.isEmpty());
+    }
+
+    @Test
+    public void isSortingAlright_HighestIsFirst() {
         assertTrue((Integer)testArray[0] == 5);
     }
 
     @Test
-    public void doubledValuesInArrayTest() {
-        mO.makeAndSortArrays(testMap);
+    public void doubledValuesAreInOneElement() {
+        mO.makeAndResortArrays(testMap);
         assertEquals("B  3\nC  3\n", mO.completeArray.get(1));
     }
 
     @Test
     public void areOutputHighestValuesOk() {
-        mO.makeAndSortArrays(testMap);
+        mO.makeAndResortArrays(testMap);
         assertEquals('D', mO.threeHighestRates().charAt(0));
     }
 
     @Test
     public void areOutputLowestValuesOk() {
-        mO.makeAndSortArrays(testMap);
+        mO.makeAndResortArrays(testMap);
         assertEquals('A',mO.threeLowestRates().charAt(0));
     }
 

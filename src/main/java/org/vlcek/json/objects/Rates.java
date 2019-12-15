@@ -2,7 +2,6 @@ package org.vlcek.json.objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.vlcek.json.objects.Periods;
 
 import java.util.ArrayList;
 import java.util.List;

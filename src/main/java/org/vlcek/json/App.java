@@ -8,7 +8,7 @@ public class App
         mapOperations mO = new mapOperations();
 
         jO.saveDataIntoMap("data.json");
-        mO.makeAndSortArrays(jO.getMapOfStates());
+        mO.makeAndResortArrays(jO.getMapOfStates());
 
         System.out.println("Three highest rates in Europe:");
         System.out.println(mO.threeHighestRates());

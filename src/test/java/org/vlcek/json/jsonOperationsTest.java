@@ -3,11 +3,6 @@ package org.vlcek.json;
 import org.junit.Before;
 import org.junit.Test;
 
-
-import org.junit.Test;
-
-import java.io.IOException;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -27,7 +22,7 @@ public class jsonOperationsTest {
     }
 
     @Test
-    public void isGettingJasonDataOk() {
+    public void isGettingJasonDataReal() {
         jO.getData("example.json");
         int actualData = jO.getRoot().getRates().get(0).getPeriods().get(0).getRates().getStandard();
         assertEquals(21,actualData);
