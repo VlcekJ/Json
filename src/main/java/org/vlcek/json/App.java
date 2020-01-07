@@ -1,7 +1,7 @@
 package org.vlcek.json;
 
-public class App
-{
+public class App {
+
     public static void main( String[] args ) {
 
         JsonOperations jO = new JsonOperations();
