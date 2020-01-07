@@ -4,53 +4,38 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.vlcek.json.objects.*;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 
-public class jsonOperations {
+public class JsonOperations {
 
     private Root root;
-
     private HashMap<String, Integer> mapOfStates = new HashMap<>();
 
-    public void downloadData() {
-        URL website = null;
-
+    public void getData() {
         try {
-            website = new URL("http://jsonvat.com/");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        try (InputStream in = website.openStream()) {
-            Files.copy(in, Paths.get("data.json"), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void getData(String source) {
-        if(source.contains("data.json")) {
-            downloadData();
-        }
-        try {
-            byte[] jsonData = Files.readAllBytes(Paths.get(source));
-
             ObjectMapper objectMapper = new ObjectMapper();
-
-            root = objectMapper.readValue(jsonData, Root.class);
+            root = objectMapper.readValue(new URL("http://jsonvat.com/"), Root.class);
         } catch (Exception E) {
-            System.out.println("Can't read JSON file.");
+            System.out.println("Can't read from URL.");
+        }
+
+    }
+
+    public void getData(String file) {
+        try {
+            byte[] jsonData = Files.readAllBytes(Paths.get(file));
+            ObjectMapper objectMapper = new ObjectMapper();
+            root = objectMapper.readValue(jsonData, Root.class);
+        } catch (IOException E) {
+            System.out.println("Can't read from file");
         }
     }
 
-    public void saveDataIntoMap(String source) {
-        getData(source);
+    public void saveDataIntoMap() {
+        getData();
         int countOfStates = root.getRates().size();
         for(int i = 0; i < countOfStates; i++) {
             mapOfStates.put(root.getRates().get(i).getName(), root.getRates().get(i).getPeriods().get(0).getRates().getStandard());

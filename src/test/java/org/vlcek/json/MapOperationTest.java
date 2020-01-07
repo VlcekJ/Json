@@ -2,22 +2,20 @@ package org.vlcek.json;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.HashMap;
 
-import static junit.framework.TestCase.*;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 
-public class mapOperationsTest {
-
-
-    private mapOperations mO;
+public class MapOperationTest {
+    private MapOperations mO;
 
     HashMap<String, Integer> testMap = new HashMap<>();
     Object[] testArray;
 
     @Before
     public void createObjectAndFillTestMap() {
-        mO = new mapOperations();
+        mO = new MapOperations();
         testMap.put("C", 3);
         testMap.put("A", 1);
         testMap.put("B", 3);
@@ -37,18 +35,25 @@ public class mapOperationsTest {
     public void testEmptyMapReturnsEmptyArrayAfterResortingMethod() {
         testMap.clear();
         mO.makeAndResortArrays(testMap);
-        assertTrue(mO.completeArray.isEmpty());
+        assertTrue(mO.getCompleteArray().isEmpty());
     }
 
     @Test
     public void isSortingAlright_HighestIsFirst() {
+        mO.makeAndResortArrays(testMap);
         assertTrue((Integer)testArray[0] == 5);
+    }
+
+    @Test
+    public void isSortingAlright_LowestIsLast() {
+        mO.makeAndResortArrays(testMap);
+        assertTrue((Integer)testArray[3] == 1);
     }
 
     @Test
     public void doubledValuesAreInOneElement() {
         mO.makeAndResortArrays(testMap);
-        assertEquals("B  3\nC  3\n", mO.completeArray.get(1));
+        assertEquals("B  3\nC  3\n", mO.getCompleteArray().get(1));
     }
 
     @Test
@@ -62,5 +67,4 @@ public class mapOperationsTest {
         mO.makeAndResortArrays(testMap);
         assertEquals('A',mO.threeLowestRates().charAt(0));
     }
-
 }
