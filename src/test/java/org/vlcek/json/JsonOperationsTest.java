@@ -2,10 +2,11 @@ package org.vlcek.json;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class JsonOperationsTest {
-    JsonOperations jO;
+    private JsonOperations jO;
 
     @Before
     public void setUp() {
@@ -14,8 +15,9 @@ public class JsonOperationsTest {
 
     @Test
     public void areDataInRightFormat() {
+        Integer i = 0;
         jO.getData();
-        assertTrue((jO.getRoot().getRates().get(0).getPeriods().get(0).getRates().getStandard() % 1) == 0);
+        assertEquals(i.getClass(), (jO.getRoot().getRates().get(0).getPeriods().get(0).getRates().getStandard().getClass()));
     }
 
     @Test
@@ -29,7 +31,6 @@ public class JsonOperationsTest {
     public void isSavingDataIntoMapOk() {
         jO.getData("example.json");
         jO.saveDataIntoMap();
-        assertTrue(jO.getMapOfStates().keySet().contains("Czech Republic"));
+        assertTrue(jO.getMapOfStates().containsKey("Czech Republic"));
     }
-
 }

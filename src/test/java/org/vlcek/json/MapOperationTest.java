@@ -10,8 +10,8 @@ import static org.junit.Assert.assertEquals;
 public class MapOperationTest {
     private MapOperations mO;
 
-    HashMap<String, Integer> testMap = new HashMap<>();
-    Object[] testArray;
+    private HashMap<String, Integer> testMap = new HashMap<>();
+    private Object[] testArray;
 
     @Before
     public void createObjectAndFillTestMap() {
@@ -27,8 +27,7 @@ public class MapOperationTest {
     public void testEmptyMapReturnsEmptyArrayAfterSortingMethod() {
         testMap.clear();
         testArray = mO.sortByValue(testMap).values().toArray();
-        System.out.println(testArray);
-        assertTrue(testArray.length == 0);
+        assertEquals(0, testArray.length);
     }
 
     @Test
@@ -41,13 +40,13 @@ public class MapOperationTest {
     @Test
     public void isSortingAlright_HighestIsFirst() {
         mO.makeAndResortArrays(testMap);
-        assertTrue((Integer)testArray[0] == 5);
+        assertEquals(5, testArray[0]);
     }
 
     @Test
     public void isSortingAlright_LowestIsLast() {
         mO.makeAndResortArrays(testMap);
-        assertTrue((Integer)testArray[3] == 1);
+        assertEquals(1, testArray[3]);
     }
 
     @Test
