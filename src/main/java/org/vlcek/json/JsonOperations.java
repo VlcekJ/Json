@@ -22,9 +22,9 @@ class JsonOperations {
         }
     }
 
-     void getData(String file) {
+     void getData(String fileName) {
         try {
-            byte[] jsonData = Files.readAllBytes(Paths.get(file));
+            byte[] jsonData = Files.readAllBytes(Paths.get(fileName));
             ObjectMapper objectMapper = new ObjectMapper();
             root = objectMapper.readValue(jsonData, Root.class);
         } catch (Exception E) {

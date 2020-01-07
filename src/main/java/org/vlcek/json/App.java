@@ -2,7 +2,7 @@ package org.vlcek.json;
 
 public class App
 {
-    public static void main( String[] args ) throws Exception {
+    public static void main( String[] args ) {
 
         JsonOperations jO = new JsonOperations();
         MapOperations mO = new MapOperations();
